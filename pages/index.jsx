@@ -1,7 +1,7 @@
 
 import Head from 'next/head';
 import Articles from '../components/Articles';
-import { wholeList } from '../data4';
+import { wholeList } from '../data6';
 
 const Home = ({wholeList}) => {
   console.log(wholeList, "wholeList");

@@ -1,7 +1,7 @@
 //import {useState, useEffect,useRef} from 'react'
 import React from "react";
 import HeadSeo from "../../components/HeadSeo";
-import { wholeList } from "../../data4";
+import { wholeList } from "../../data6";
 export const getStaticProps = async ({ params }) => {
   console.log(params, "params");
   const wholeListFiltered = wholeList.filter((p) => p.slug === params.slug);
