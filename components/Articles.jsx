@@ -33,31 +33,31 @@ const Articles = ({
 }) => {
   return (
     <>
-      <div class="container">
+      <div className="container">
         <div>
           <div
-            class="bg-white rounded p-4 shadow md:flex justify-between"
+            className="bg-white rounded p-4 shadow md:flex justify-between"
             data-v-648b5d7b=""
           >
             <div data-v-648b5d7b="">
               <a href={`/python/${slug}`}>
-                <h4 class="text-2xl font-semibold" data-v-648b5d7b="">
+                <span className="text-2xl font-semibold" data-v-648b5d7b="">
                   {errorTitle}
-                </h4>
+                </span>
               </a>
-              <p class="my-2 text-lg" data-v-648b5d7b="">
+              <p className="my-2 text-lg" data-v-648b5d7b="">
                 {detail} {" " + author}
                 <br />{" "}
-                <p className="inline whitespace-pre overflow-x-scroll bg-blog/30 p-1">
+                <span className="inline whitespace-pre overflow-x-scroll bg-blog/30 p-1">
                   {code1}
-                </p>
+                </span>
               </p>
-              <div class="flex items-center mt-4" data-v-648b5d7b="">
+              <div className="flex items-center mt-4" data-v-648b5d7b="">
                 {topics?.map(
                   (topic, index) =>
                     index < 4 && (
                       <div
-                        class="text-xs uppercase font-bold tracking-wider bg-gray-300 inline-block px-2 py-1 rounded mr-2"
+                        className="text-xs uppercase font-bold tracking-wider bg-gray-300 inline-block px-2 py-1 rounded mr-2"
                         data-v-648b5d7b=""
                       >
                         {topic}
@@ -67,21 +67,21 @@ const Articles = ({
               </div>
             </div>
             <div
-              class="text-right md:ml-8 flex items-center"
+              className="text-right md:ml-8 flex items-center"
               data-v-648b5d7b=""
             >
               <div
-                class="flex md:block -mx-2 md:mx-0 mt-3 md:mt-0"
+                className="flex md:block -mx-2 md:mx-0 mt-3 md:mt-0"
                 data-v-648b5d7b=""
               >
                 <div
-                  class="flex justify-end mb-1 px-2 md:px-0"
+                  className="flex justify-end mb-1 px-2 md:px-0"
                   data-v-648b5d7b=""
                 >
-                  <div class="text-xl" data-v-648b5d7b="">
+                  <div className="text-xl" data-v-648b5d7b="">
                     {fork}
                   </div>
-                  <div class="ml-2" data-v-648b5d7b="">
+                  <div className="ml-2" data-v-648b5d7b="">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="24"
@@ -92,7 +92,7 @@ const Articles = ({
                       strokeWidth="2"
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      class="inline"
+                      className="inline"
                       data-v-648b5d7b=""
                     >
                       <path
@@ -114,13 +114,13 @@ const Articles = ({
                   </div>
                 </div>
                 <div
-                  class="flex justify-end items-bottom mb-1 px-2 md:px-0"
+                  className="flex justify-end items-bottom mb-1 px-2 md:px-0"
                   data-v-648b5d7b=""
                 >
-                  <div class="text-xl" data-v-648b5d7b="">
+                  <div className="text-xl" data-v-648b5d7b="">
                     {stars}
                   </div>
-                  <div class="ml-2" data-v-648b5d7b="">
+                  <div className="ml-2" data-v-648b5d7b="">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="24"
@@ -131,7 +131,7 @@ const Articles = ({
                       strokeWidth="2"
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      class="inline"
+                      className="inline"
                       data-v-648b5d7b=""
                     >
                       <polygon
@@ -141,13 +141,16 @@ const Articles = ({
                     </svg>
                   </div>
                 </div>
-                <div class="flex justify-end px-2 md:px-0" data-v-648b5d7b="">
-                  <div class="text-xl" data-v-648b5d7b="">
+                <div
+                  className="flex justify-end px-2 md:px-0"
+                  data-v-648b5d7b=""
+                >
+                  <div className="text-xl" data-v-648b5d7b="">
                     {languages?.map(
                       (lag) => lag !== "Python" && <span>{lag} </span>
                     )}
                   </div>
-                  <div class="ml-2" data-v-648b5d7b="">
+                  <div className="ml-2" data-v-648b5d7b="">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="24"
@@ -158,7 +161,7 @@ const Articles = ({
                       strokeWidth="2"
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      class="inline"
+                      className="inline"
                       data-v-648b5d7b=""
                     >
                       <polyline
