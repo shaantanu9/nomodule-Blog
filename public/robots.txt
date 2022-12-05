@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://shodkk.com
+Host: https://codingerror.shodkk.com
 
 # Sitemaps
-Sitemap: https://shodkk.com/sitemap.xml
+Sitemap: https://codingerror.shodkk.com/sitemap.xml
