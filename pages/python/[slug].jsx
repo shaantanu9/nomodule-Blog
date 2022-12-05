@@ -233,7 +233,6 @@ const ErrorSlug = () => {
             <h1 className="text-2xl font-bold text-gray-900">Repo Detail</h1>
             <div className="flex flex-col m-auto min-w-auto">
               <h1 className="text-2xl font-bold text-gray-900 capitalize ">
-                {" "}
                 Title:-
                 <a href={pypi_link}>{title}</a>
               </h1>
