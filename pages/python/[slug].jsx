@@ -209,9 +209,9 @@ const ErrorSlug = ({ singleArticle }) => {
                 {about}
               </p>
               <p>Contributor</p>
-              {contributors?.map((contributor) => (
+              {/* {contributors?.map((contributor) => (
                 <p key={contributor}>{contributor}</p>
-              ))}
+              ))} */}
 
               <a href={link}>{link}</a>
               <p>email {email}</p>

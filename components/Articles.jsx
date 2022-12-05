@@ -53,7 +53,7 @@ const Articles = ({
                 </p>
               </p>
               <div class="flex items-center mt-4" data-v-648b5d7b="">
-                {topics.map(
+                {topics?.map(
                   (topic, index) =>
                     index < 4 && (
                       <div
@@ -89,9 +89,9 @@ const Articles = ({
                       viewBox="0 0 24 24"
                       fill="none"
                       stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                       class="inline"
                       data-v-648b5d7b=""
                     >
@@ -128,9 +128,9 @@ const Articles = ({
                       viewBox="0 0 24 24"
                       fill="none"
                       stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                       class="inline"
                       data-v-648b5d7b=""
                     >
@@ -143,7 +143,7 @@ const Articles = ({
                 </div>
                 <div class="flex justify-end px-2 md:px-0" data-v-648b5d7b="">
                   <div class="text-xl" data-v-648b5d7b="">
-                    {languages.map(
+                    {languages?.map(
                       (lag) => lag !== "Python" && <span>{lag} </span>
                     )}
                   </div>
@@ -155,9 +155,9 @@ const Articles = ({
                       viewBox="0 0 24 24"
                       fill="none"
                       stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                       class="inline"
                       data-v-648b5d7b=""
                     >
