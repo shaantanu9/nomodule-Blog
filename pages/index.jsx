@@ -3,7 +3,7 @@ import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import Articles from "../components/Articles";
 import Pagination from "../components/Pagination.jsx";
-import { wholeList } from "../data6";
+
 const Home = ({ wholeList }) => {
   // console.log(wholeList[0], "wholeList");
   return (
