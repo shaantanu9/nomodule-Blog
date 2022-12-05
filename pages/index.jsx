@@ -1,25 +1,37 @@
+import axios from "axios";
 import Head from "next/head";
 import { useState } from "react";
-import { v4 as uuidv4 } from "uuid";
 import Articles from "../components/Articles";
-import Pagination from "../components/Pagination.jsx";
+import Pagination from "../components/Pagination";
+const Home = ({ wholeListData }) => {
+  const [totalPages, setTotalPages] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(10);
 
-const Home = ({ wholeList }) => {
-  // console.log(wholeList[0], "wholeList");
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
   return (
-    <div className="flex flex-col items-center py-2">
+    <>
       <Head>
         <title>Create Next App</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       {/* grid view */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {/* {wholeList.map((singleArticle, index) => (
-          <Articles key={singleArticle.slug} {...singleArticle} />
-        ))} */}
-        <LimitPagination wholeList={wholeList} />
+        {wholeListData.nomos.map((singleArticle, index) => (
+          // <p>Gada</p>
+          <Articles key={singleArticle._id} {...singleArticle} />
+        ))}
       </div>
-    </div>
+      <Pagination
+        totalPosts={totalPages}
+        currentPage={currentPage}
+        postsPerPage={postsPerPage}
+        paginate={paginate}
+      />
+    </>
   );
 };
 
@@ -28,50 +40,12 @@ export default Home;
 // Get Static Props
 
 export async function getStaticProps() {
+  const BACKEND_URL = process.env.BACKEND_URL;
+  const wholeList = await axios(BACKEND_URL + "/api?limit=30");
+  const wholeListData = await wholeList.data;
   return {
-    props: { wholeList },
+    props: { wholeListData },
   };
 }
 
 //  Load content in limit of 10 and add pagination
-
-function LimitPagination({ wholeList }) {
-  // console.log(wholeList.length, wholeList[1], "wholeList");
-  const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage] = useState(100);
-
-  // Get current posts
-  const indexOfLastPost = currentPage * postsPerPage;
-  const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = wholeList.slice(indexOfFirstPost, indexOfLastPost);
-  // console.log(currentPosts, "currentPosts");
-  // Change page
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
-
-  let PAGE_SIZE = 10;
-  var startIndex = (currentPage - 1) * PAGE_SIZE;
-  var endIndex = startIndex + PAGE_SIZE;
-
-  return (
-    <>
-      {wholeList.slice(startIndex, endIndex).map((singleArticle, index) => (
-        <Articles key={singleArticle.slug + uuidv4()} {...singleArticle} />
-      ))}
-      {/* Pagination */}
-      <p>Pagination Pagination</p>
-      <Pagination
-        postsPerPage={postsPerPage}
-        totalPosts={wholeList.length - 10000}
-        paginate={paginate}
-      />
-    </>
-
-    //   wholeList.slice(startIndex, endIndex)
-    // .map((item) => <a href={"/python/" + item.slug}>{item.title}</a>)
-  );
-
-  // return wholeList.map((singleArticle, index) => (
-  //   // <Articles key={singleArticle.slug} {...singleArticle} />
-  //   <a href={"/python/" + singleArticle.slug}>{singleArticle.errorTitle}</a>
-  // ));
-}

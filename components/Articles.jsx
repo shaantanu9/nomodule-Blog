@@ -31,6 +31,11 @@ const Articles = ({
   markdown,
   slug,
 }) => {
+  let errorTitle2 = errorTitle.replace("Python Error: ", "");
+  console.log(errorTitle2, "errorTitle2");
+  errorTitle2 =
+    errorTitle2.length > 40 ? errorTitle2.slice(0, 40) + "..." : errorTitle2;
+
   return (
     <>
       <div className="container">
@@ -41,14 +46,21 @@ const Articles = ({
           >
             <div data-v-648b5d7b="">
               <a href={`/python/${slug}`}>
-                <span className="text-2xl font-semibold" data-v-648b5d7b="">
-                  {errorTitle}
+                <span
+                  title={errorTitle}
+                  className="text-2xl font-semibold"
+                  data-v-648b5d7b=""
+                >
+                  {errorTitle2}
                 </span>
               </a>
               <p className="my-2 text-lg" data-v-648b5d7b="">
-                {detail} {" " + author}
+                <span className="font-semibold"> Package Name</span> {detail}{" "}
+                <br />
+                <span className="font-semibold"> Author Name</span>{" "}
+                {" " + author}
                 <br />{" "}
-                <span className="inline whitespace-pre overflow-x-scroll bg-blog/30 p-1">
+                <span className="inline whitespace-pre overflow-x-scroll bg-blog/30 p-1 ">
                   {code1}
                 </span>
               </p>
@@ -57,6 +69,7 @@ const Articles = ({
                   (topic, index) =>
                     index < 4 && (
                       <div
+                        key={topic}
                         className="text-xs uppercase font-bold tracking-wider bg-gray-300 inline-block px-2 py-1 rounded mr-2"
                         data-v-648b5d7b=""
                       >
@@ -147,7 +160,7 @@ const Articles = ({
                 >
                   <div className="text-xl" data-v-648b5d7b="">
                     {languages?.map(
-                      (lag) => lag !== "Python" && <span>{lag} </span>
+                      (lag) => lag !== "Python" && <span key={lag}>{lag} </span>
                     )}
                   </div>
                   <div className="ml-2" data-v-648b5d7b="">
@@ -186,3 +199,5 @@ const Articles = ({
 
 // export default React.memo(Articles);
 export default Articles;
+
+// If errorTitle is bigger than 20, it will be cut off and add ... at the end

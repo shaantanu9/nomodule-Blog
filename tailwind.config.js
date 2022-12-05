@@ -1,3 +1,20 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:a2fda7362af95f5abb02b281e593f2d78bd1e8515ab947e83d5b59e21213f390
-size 241
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    "./pages/**/*.{js,ts,jsx,tsx}",
+    "./components/**/*.{js,ts,jsx,tsx}",
+    "./app/**/*.{js,ts,jsx,tsx}",
+  ],
+  theme: {
+    extend: {
+      colors: {
+        blog: "#ef4136",
+        "blog-light": "#FFD8D8",
+        "blog-dark": "#C70000",
+        "hover-blog": "rgb(253, 10, 1) / 0.75",
+        "hover-blog-light": "#ff7470",
+      },
+    },
+  },
+  plugins: [],
+};
