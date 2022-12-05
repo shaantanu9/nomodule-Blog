@@ -1,3 +1,8 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:26ccced7db46d6e8387e6868ba1b129ff5c6cfd03e9e9450344567541970121d
-size 87
+/** @type {import('next').NextConfig} */
+module.exports = {
+  reactStrictMode: true,
+  env: {
+    // Reference a variable that was defined in the .env file and make it available at Build Time
+    BACKEND_URL: "https://wild-puce-hippopotamus-hose.cyclic.app",
+  },
+};
