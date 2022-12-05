@@ -18,7 +18,7 @@ const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
             paginate(1);
           }}
         >
-          Next
+          Next Page
         </button>
       </div>
     </>
