@@ -1,28 +1,57 @@
 //import {useState, useEffect,useRef} from 'react'
-import React from "react";
+import axios from "axios";
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
 import HeadSeo from "../../components/HeadSeo";
-import { wholeList } from "../../data6";
-export const getStaticProps = async ({ params }) => {
-  console.log(params, "params");
-  const wholeListFiltered = wholeList.filter((p) => p.slug === params.slug);
-  console.log(Object.keys(wholeListFiltered[0]), "wholeListFiltered");
-  return {
-    props: {
-      singleArticle: wholeListFiltered[0],
-    },
-  };
-};
 
-export const getStaticPaths = async () => {
-  console.log("object");
-  const paths = wholeList.map((singleArticle) => ({
-    params: { slug: singleArticle.slug.toString() },
-  }));
+// export const getStaticProps = async ({ params }) => {
+//   console.log(params, "params");
+//   const BACKEND_URL = process.env.BACKEND_URL;
+//   const res = await axios(BACKEND_URL + "api/slug/" + params.slug);
+//   console.log(res, "res.data");
+//   // const wholeListFiltered = wholeList.filter((p) => p.slug === params.slug);
+//   // console.log(Object.keys(wholeListFiltered[0]), "wholeListFiltered");
+//   return {
+//     props: {
+//       singleArticle: res.data,
+//     },
+//   };
+// };
 
-  return { paths, fallback: false };
-};
+// export const getStaticPaths = async () => {
+//   const BACKEND_URL = "http://localhost:8080";
+//   // const res = await axios(BACKEND_URL + "/api/slug");
+//   // console.log(res.data.nomos, "res.data");
+//   // const wholeList = await res.data.nomos;
 
-const ErrorSlug = ({ singleArticle }) => {
+//   const res = await axios(BACKEND_URL + "/api");
+//   console.log(res.data.nomos, "res.data");
+//   const wholeList = await res.data.nomos;
+//   const paths = wholeList.map((singleArticle) => ({
+//     params: { slug: singleArticle.slug.toString() },
+//   }));
+
+//   // const paths = [ { params: { slug:  } } ];
+//   return { paths, fallback: false };
+// };
+
+// const ErrorSlug = ({ singleArticle }) => {
+const ErrorSlug = () => {
+  const router = useRouter();
+
+  const data = router.query.slug || [];
+
+  const [singleArticle, setSingleArticle] = useState({});
+  useEffect(() => {
+    const BACKEND_URL = "http://localhost:8080";
+
+    // const BACKEND_URL = process.env.BACKEND_URL;
+    axios(BACKEND_URL + "/api/slug/" + data).then((res) => {
+      console.log(res, "res.data");
+      setSingleArticle(res.data);
+    });
+  }, [data]);
+  console.log(singleArticle, "singleArticle");
   const {
     title,
     detail,
@@ -88,7 +117,8 @@ const ErrorSlug = ({ singleArticle }) => {
         notranslate={""}
         noydir={""}
         author={"Shodkk Shantanu"}
-        keyword={[...topics, ...languages]}
+        keyword={["error", "python", "django", "javascript", "react"]}
+        // keyword={[...topics, ...languages]}
         keywordName={"error_name"}
       />
       <div className="container mx-auto">
@@ -124,7 +154,7 @@ const ErrorSlug = ({ singleArticle }) => {
               {/*{Array Mapping keyword and Topics}*/}
 
               <div className="container  mx-auto mt-8 p1">
-                {languages.map((language) => (
+                {languages?.map((language) => (
                   <p
                     key={language}
                     className="inline-flex items-center justify-center px-3 py-1 mr-2 text-xs font-medium leading-4 text-gray-800 bg-gray-100 rounded-full"
@@ -134,7 +164,7 @@ const ErrorSlug = ({ singleArticle }) => {
                 ))}
               </div>
               <div className="container  mx-auto mb-8">
-                {topics.map((language) => (
+                {topics?.map((language) => (
                   <p
                     key={language}
                     className="inline-flex items-center justify-center px-3 py-1 mr-2 text-xs font-medium leading-4 text-gray-800 bg-gray-100 rounded-full"
@@ -179,17 +209,19 @@ const ErrorSlug = ({ singleArticle }) => {
       </div>
       <div className="flex container mx-auto  justify-center">
         <div className="container mx-auto">
-          <a class="flex justify-start items-center">
+          <a className="flex justify-start items-center">
             {/* <Image
                 alt="blog"
                 src="https://dummyimage.com/103x103"
-                class="w-12 h-12 rounded-full flex-shrink-0 object-cover object-center"
+                className="w-12 h-12 rounded-full flex-shrink-0 object-cover object-center"
                 width={103}
                 height={103}
               /> */}
-            <p class="flex-grow flex flex-col pl-4">
-              <span class="title-font font-medium text-gray-900">{author}</span>
-              <span class="text-gray-400 text-xs tracking-widest mt-0.5">
+            <p className="flex-grow flex flex-col pl-4">
+              <span className="title-font font-medium text-gray-900">
+                {author}
+              </span>
+              <span className="text-gray-400 text-xs tracking-widest mt-0.5">
                 DEVELOPER
               </span>
               <span>{email}</span>
@@ -197,7 +229,7 @@ const ErrorSlug = ({ singleArticle }) => {
               <span>{maintainerlink}</span>
             </p>
           </a>
-          <div>
+          <div className="container">
             <h1 className="text-2xl font-bold text-gray-900">Repo Detail</h1>
             <div className="flex flex-col m-auto min-w-auto">
               <h1 className="text-2xl font-bold text-gray-900 capitalize ">
@@ -215,17 +247,61 @@ const ErrorSlug = ({ singleArticle }) => {
 
               <a href={link}>{link}</a>
               <p>email {email}</p>
-              <p>maintainername {maintainername}</p>
-              <p>maintainerlink {maintainerlink}</p>
-              <p>Github {github}</p>
-              <p>Stars {stars}</p>
-              <p>Fork {fork}</p>
-              <p>Author {author}</p>
-              <p>Time{time}</p>
-              <p>Licence {licence}</p>
-              <p>Package Detail {package_details}</p>
-              <p>Code {code}</p>
-              <p>file_link {file_link}</p>
+              <p>
+                <span className="font-semibold text-blog">maintainername </span>
+
+                {maintainername}
+              </p>
+              <p>
+                <span className="font-semibold text-blog">maintainerlink </span>
+
+                {maintainerlink}
+              </p>
+              <p>
+                <span className="font-semibold text-blog">Github </span>
+                {github}
+              </p>
+              <p>
+                <span className="font-semibold text-blog">Stars </span>
+                {stars}
+              </p>
+              <p>
+                <span className="font-semibold text-blog">Fork </span>
+                {fork}
+              </p>
+              <p>
+                <span className="font-semibold text-blog">Author </span>
+                {author}
+              </p>
+              <p>
+                <span className="font-semibold text-blog">Time </span>
+                {time}
+              </p>
+              <p>
+                <span className="font-semibold text-blog">Licence </span>
+                {licence}
+              </p>
+              <p>
+                <span className="font-semibold text-blog">Package Detail </span>
+                {package_details}
+              </p>
+              <p>
+                <span className="font-semibold text-blog">Code </span>
+                {code}
+              </p>
+              <p>
+                file_link{" "}
+                <span className="overflow-hidden" title={file_link}>
+                  {" "}
+                  <a
+                    href={file_link}
+                    download
+                    className="text-blog font-semibold"
+                  >
+                    Download
+                  </a>
+                </span>
+              </p>
               <p>Watching {watching}</p>
             </div>
           </div>
@@ -248,3 +324,5 @@ function copyCode(code) {
   document.execCommand("copy");
   document.body.removeChild(el);
 }
+
+// if any p tag going outside screen then it will be hidden
