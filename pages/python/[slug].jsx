@@ -43,7 +43,7 @@ const ErrorSlug = () => {
 
   const [singleArticle, setSingleArticle] = useState({});
   useEffect(() => {
-    const BACKEND_URL = "http://localhost:8080";
+    const BACKEND_URL = process.env.BACKEND_URL;
 
     // const BACKEND_URL = process.env.BACKEND_URL;
     axios(BACKEND_URL + "/api/slug/" + data).then((res) => {
