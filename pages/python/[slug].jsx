@@ -7,7 +7,7 @@ const BACKEND_URL = process.env.BACKEND_URL;
 export const getStaticPaths = async () => {
   const BACKEND_URL = "https://wild-puce-hippopotamus-hose.cyclic.app";
   // const BACKEND_URL = "http://localhost:8080";
-  const res = await axios(BACKEND_URL + "/api");
+  const res = await axios(BACKEND_URL + "/api?limit=3000");
   const data = await res.data.nomos;
 
   const paths = data.map((singleArticle) => {
