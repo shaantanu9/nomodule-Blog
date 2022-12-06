@@ -1,17 +1,39 @@
 import axios from "axios";
 import Head from "next/head";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Articles from "../components/Articles";
 import Pagination from "../components/Pagination";
 const Home = ({ wholeListData }) => {
-  const [totalPages, setTotalPages] = useState(0);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage] = useState(10);
+  const { currentPage, postsPerPage, totalPages, paginate } = useSelector(
+    (state) => state.paginationReducer
+  );
 
-  const paginate = (pageNumber) => {
-    setCurrentPage(pageNumber);
+  const [pageData, setPageData] = useState(wholeListData);
+  const [inc, setInc] = useState(0);
+
+  const dispatch = useDispatch();
+
+  console.log(currentPage, postsPerPage, totalPages, paginate, "pagination");
+
+  useEffect(() => {
+    getData()
+      .then((data) => {
+        setPageData(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [currentPage]);
+
+  const getData = async () => {
+    const BACKEND_URL = process.env.BACKEND_URL;
+
+    const res = await axios(BACKEND_URL + "/api?limit=10&page=" + currentPage);
+    const data = await res.data;
+    return data;
   };
-
+  console.log(pageData, "pageData");
   return (
     <>
       <Head>
@@ -19,18 +41,26 @@ const Home = ({ wholeListData }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       {/* grid view */}
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {wholeListData.nomos.map((singleArticle, index) => (
+        {pageData.nomos.map((singleArticle, index) => (
           // <p>Gada</p>
           <Articles key={singleArticle._id} {...singleArticle} />
         ))}
+        {/* {wholeListData.nomos.map((singleArticle, index) => (
+          // <p>Gada</p>
+          <Articles key={singleArticle._id} {...singleArticle} />
+        ))} */}
       </div>
-      <Pagination
-        totalPosts={totalPages}
-        currentPage={currentPage}
-        postsPerPage={postsPerPage}
-        paginate={paginate}
-      />
+      <button
+        onClick={() => {
+          setInc(inc + 1);
+          dispatch({ type: "PAGINATION_INC" });
+        }}
+      >
+        inC
+      </button>
+      <Pagination />
     </>
   );
 };
@@ -41,7 +71,9 @@ export default Home;
 
 export async function getStaticProps() {
   const BACKEND_URL = process.env.BACKEND_URL;
-  const wholeList = await axios(BACKEND_URL + "/api?limit=30");
+  // const BACKEND_URL = "http://localhost:8080"
+  console.log(BACKEND_URL, "BACKEND_URL");
+  const wholeList = await axios(BACKEND_URL + "/api");
   const wholeListData = await wholeList.data;
   return {
     props: { wholeListData },

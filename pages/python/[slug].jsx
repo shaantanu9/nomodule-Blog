@@ -22,8 +22,8 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps = async (context) => {
-  // const slug = context.params.slug;
-  const slug = "Python-Error-No-module-named-plotlyfutureextractchartstudio";
+  const slug = context.params.slug;
+  // const slug = "Python-Error-No-module-named-plotlyfutureextractchartstudio";
 
   const BACKEND_URL = "https://wild-puce-hippopotamus-hose.cyclic.app";
   // const BACKEND_URL = "http://localhost:8080";
