@@ -32,7 +32,7 @@ const Articles = ({
   slug,
 }) => {
   let errorTitle2 = errorTitle.replace("Python Error: ", "");
-  console.log(errorTitle2, "errorTitle2");
+  // console.log(errorTitle2, "errorTitle2");
   errorTitle2 =
     errorTitle2.length > 40 ? errorTitle2.slice(0, 40) + "..." : errorTitle2;
 
@@ -61,7 +61,7 @@ const Articles = ({
                 {" " + author}
                 <br />{" "}
                 <span className="inline whitespace-pre overflow-x-scroll bg-blog/30 p-1 ">
-                  {code1}
+                  {code2}
                 </span>
               </p>
               <div className="flex items-center mt-4" data-v-648b5d7b="">
