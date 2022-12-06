@@ -1,5 +1,6 @@
 //import {useState, useEffect,useRef} from 'react'
 //import Articles from './components/Articles'
+import Link from "next/link";
 const Articles = ({
   title,
   detail,
@@ -45,7 +46,7 @@ const Articles = ({
             data-v-648b5d7b=""
           >
             <div data-v-648b5d7b="">
-              <a href={`/python/${slug}`}>
+              <Link href={`/python/${slug}`}>
                 <span
                   title={errorTitle}
                   className="text-2xl font-semibold"
@@ -53,7 +54,7 @@ const Articles = ({
                 >
                   {errorTitle2}
                 </span>
-              </a>
+              </Link>
               <p className="my-2 text-lg" data-v-648b5d7b="">
                 <span className="font-semibold"> Package Name</span> {detail}{" "}
                 <br />

@@ -2,28 +2,29 @@
 import React from "react";
 import SearchBar from "./SearchBar";
 //import Navbar from './components/Navbar'
+import Link from "next/link";
 const Navbar = (props) => {
   return (
     <>
       <header aria-label="Site Header" className="bg-white">
         <div className="mx-auto flex h-16 items-center gap-8 px-4 sm:px-6 lg:px-8">
-          <a className="block text-blog" href="/">
+          <Link className="block text-blog" href="/">
             <span className="sr-only">Home</span>
             <p className="text-2xl font-bold text-blog hover:text-blog/75 ">
               Shodkk
             </p>
-          </a>
+          </Link>
 
           <div className="flex flex-1 items-center justify-end md:justify-between">
             <nav aria-label="Site Nav" className="hidden md:block">
               <ul className="flex items-center gap-6 text-sm">
                 <li>
-                  <a
+                  <Link
                     className="font-semibold text-gray-700 transition hover:text-blog/75"
                     href="/"
                   >
                     Careers
-                  </a>
+                  </Link>
                 </li>
 
                 <li>
