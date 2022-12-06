@@ -1,57 +1,49 @@
 //import {useState, useEffect,useRef} from 'react'
 import axios from "axios";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import HeadSeo from "../../components/HeadSeo";
+const BACKEND_URL = process.env.BACKEND_URL;
+export const getStaticPaths = async () => {
+  const BACKEND_URL = "https://wild-puce-hippopotamus-hose.cyclic.app";
+  // const BACKEND_URL = "http://localhost:8080";
+  const res = await axios(BACKEND_URL + "/api");
+  const data = await res.data.nomos;
 
-// export const getStaticProps = async ({ params }) => {
-//   console.log(params, "params");
-//   const BACKEND_URL = process.env.BACKEND_URL;
-//   const res = await axios(BACKEND_URL + "api/slug/" + params.slug);
-//   console.log(res, "res.data");
-//   // const wholeListFiltered = wholeList.filter((p) => p.slug === params.slug);
-//   // console.log(Object.keys(wholeListFiltered[0]), "wholeListFiltered");
-//   return {
-//     props: {
-//       singleArticle: res.data,
-//     },
-//   };
-// };
+  const paths = data.map((singleArticle) => {
+    return {
+      params: {
+        slug: singleArticle.slug.toString(),
+      },
+    };
+  });
+  return { paths, fallback: true };
+  // return { paths, fallback: "blocking" };
+};
 
-// export const getStaticPaths = async () => {
-//   const BACKEND_URL = "http://localhost:8080";
-//   // const res = await axios(BACKEND_URL + "/api/slug");
-//   // console.log(res.data.nomos, "res.data");
-//   // const wholeList = await res.data.nomos;
+export const getStaticProps = async (context) => {
+  // const slug = context.params.slug;
+  const slug = "Python-Error-No-module-named-plotlyfutureextractchartstudio";
 
-//   const res = await axios(BACKEND_URL + "/api");
-//   console.log(res.data.nomos, "res.data");
-//   const wholeList = await res.data.nomos;
-//   const paths = wholeList.map((singleArticle) => ({
-//     params: { slug: singleArticle.slug.toString() },
-//   }));
+  // const BACKEND_URL = "https://wild-puce-hippopotamus-hose.cyclic.app";
+  const BACKEND_URL = "http://localhost:8080";
+  const res = await axios(BACKEND_URL + "/api/slug/" + slug);
+  const data = await res.data;
 
-//   // const paths = [ { params: { slug:  } } ];
-//   return { paths, fallback: false };
-// };
+  return {
+    props: {
+      singleArticle: data[0],
+    },
+  };
+};
 
-// const ErrorSlug = ({ singleArticle }) => {
-const ErrorSlug = () => {
+const ErrorSlug = ({ singleArticle }) => {
+  console.log(singleArticle, "singleArticle");
   const router = useRouter();
 
-  const data = router.query.slug || [];
-
-  const [singleArticle, setSingleArticle] = useState({});
-  useEffect(() => {
-    const BACKEND_URL = process.env.BACKEND_URL;
-
-    // const BACKEND_URL = process.env.BACKEND_URL;
-    axios(BACKEND_URL + "/api/slug/" + data).then((res) => {
-      console.log(res, "res.data");
-      setSingleArticle(res.data);
-    });
-  }, [data]);
-  console.log(singleArticle, "singleArticle");
+  if (router.isFallback) {
+    return <div>loading...</div>;
+  }
   const {
     title,
     detail,
